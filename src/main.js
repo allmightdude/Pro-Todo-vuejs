@@ -4,17 +4,9 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import VueAxios from "vue-axios"
-// import VeeValidate from 'vee-validate';
 import '@/assets/style.css';
 
 import setupInterceptors from './services/setupInterceptors';
-
-
-// basic scss files
-
-
-
-// Vue.use(VeeValidate);
 
 Vue.config.productionTip = false
 

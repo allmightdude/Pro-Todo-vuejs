@@ -31,7 +31,6 @@ const setup = (store) => {
                 }
                 
                 if(err.response.status === 401 && !originalConfig._retry){
-                    console.log('Access Token was expired');
                     originalConfig._retry = true;
 
                     try {
@@ -44,9 +43,9 @@ const setup = (store) => {
                         store.dispatch('auth/refreshToken' , accessToken)
 
                         TokenService.updateLocalAccessToken(accessToken);
-                        // console.log(originalConfig);
-                        // return axiosInstance(originalConfig);
-                                             
+
+                        
+                        
                     } catch (error) {
                         console.log('can not get refreshToken!' , error);
                         return Promise.reject(error);
@@ -54,30 +53,7 @@ const setup = (store) => {
                 }
             }
         }
-        // async (err) =>{
-        //     const originalConfig = err.config;
 
-        //     if(originalConfig.url !== "/users/login" && err.response){
-        //         // Access Token was expired
-        //         if(err.response.status === 401 && !originalConfig._retry){
-        //             originalConfig._retry = true;
-
-        //             try {
-        //                 const rs = await axiosInstance.post('/users/refreshtoken' , {
-        //                     refreshToken : TokenService.getLocalRefreshToken()
-        //                 });
-        //                 const { accessToken } = rs.data;
-        //                 store.dispatch('auth/refreshToken' , accessToken);
-        //                 TokenService.updateLocalAccessToken(accessToken);
-        //                 return axiosInstance(originalConfig);
-        //             } catch (error) {
-        //                 return Promise.reject(error);
-        //             }
-        //         }
-        //     }
-
-        //     return Promise.reject(err)
-        // }
     )
 }
 

@@ -96,7 +96,6 @@ export default {
 
             UserService.createPlan(plan)
                 .then(res => {
-                    console.log(res);
                     this.hidePopup();
                 })
                 .catch(err => {

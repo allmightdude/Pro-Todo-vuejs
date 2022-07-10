@@ -30,7 +30,6 @@ export default new Vuex.Store({
   mutations:{
     storeTasks(state , tasks){
       state.tasks = tasks;
-      console.log(tasks);
     },
     addTask(state , task){
       if(task.date == today) {
@@ -59,11 +58,6 @@ export default new Vuex.Store({
       taskItem.checked = !taskItem.checked;
     },
 
-    // getCheckedTask(state , id){
-    //   let taskItem = state.tasks.find(task => task._id === id);
-    //   console.log(taskItem);
-    //   // return taskItem.checked;
-    // }
   },
   actions:{
     getTasksbyDate({commit} , date){
