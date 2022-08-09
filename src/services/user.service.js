@@ -1,15 +1,16 @@
-import api from './api'
+import api from './api';
 
 class UserService {
 
-    async getTasks(){
-        try {
-            let res = await api.get('tasks')
-            return res
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    // async getTasks(){
+    //     try {
+    //         let res = await api.get('tasks');
+    //         console.log(res.tasks);
+    //         return res
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
     
     async getTasksbyDate(date){
         try {
@@ -59,6 +60,11 @@ class UserService {
     
     async checkTask(id){
         await api.put(`tasks/${id}`)
+    }
+
+    async deletePlan(id){
+        let res = await api.delete(`plans/delete/${id}`);
+        return res;
     }
 
 }

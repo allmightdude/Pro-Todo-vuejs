@@ -50,7 +50,6 @@ export default {
     methods: {
         getPlans(){
             this.$store.dispatch('getPlansByDate' , this.dateValue);
-
         },
         getDate(date){
             return moment(date)

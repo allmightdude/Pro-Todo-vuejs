@@ -57,13 +57,10 @@ export default {
     },
     computed: {
         tasks(){
-            return this.$store.getters.getTasks
+            return this.$store.getters.getTasks;
         }
     },
     methods: { // log => 2023-12-10 
-        // showPopup(){
-        //     this.$emit('showPopup' , 'new-task');
-        // },
 
         getTasks(){
             this.$store.dispatch('getTasksbyDate' , this.dateValue);

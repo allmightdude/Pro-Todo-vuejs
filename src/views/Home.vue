@@ -61,6 +61,7 @@ const {
 } = require("../services/getToday");
 
 export default {
+  name : "HomeView",
   data() {
     return {
       showP: false,
@@ -126,7 +127,7 @@ export default {
     }
   },
 
-  async mounted() {
+  mounted() {
     this.dateValue = GetToday(); // log => 2023-12-10
     this.$store.dispatch("getTasksbyDate", this.dateValue);
     this.$store.dispatch("getCategories");
@@ -135,6 +136,7 @@ export default {
       getfirstLast().firstDayWeek,
       getfirstLast().lastDayWeek
     );
+
     this.$store.dispatch("addPlans", dates);
   },
 };
