@@ -24,7 +24,7 @@
                     </span>
                 </div>
 
-                <div class="plans__item" @click="showPopup">
+                <div class="plans__item" @click="showPopup('new-plan')">
                     <svg class="plus-icon">
                         <use xlink:href="@/assets/sprite.svg#icon-plus"></use>
                     </svg>
@@ -41,6 +41,7 @@
 const {GetToday , moment} = require('../../services/getToday');
 
 export default {
+    inject :['showPopup' , 'showPlanPopup'],
     data() {
         return {
             dateValue : null,
@@ -50,12 +51,6 @@ export default {
         getPlans(){
             this.$store.dispatch('getPlansByDate' , this.dateValue);
 
-        },
-        showPopup(){
-            this.$emit('showPopup' , 'new-plan')
-        },
-        showPlanPopup(id){
-            this.$emit('showPlanPopup' , id)
         },
         getDate(date){
             return moment(date)

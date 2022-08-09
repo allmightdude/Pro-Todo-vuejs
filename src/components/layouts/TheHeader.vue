@@ -16,7 +16,7 @@
 
         
             <div class="col-12">
-                <Categories @showPopup="showPopup"/>
+                <Categories @showPopup="showPopup('new-cat')"/>
             </div>        
 
         </div>

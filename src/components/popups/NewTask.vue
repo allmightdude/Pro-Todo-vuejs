@@ -41,6 +41,7 @@
 import UserService from '../../services/user.service'
 
 export default {
+    inject :['hidePopup'],
     data() {
         return {
             title : null,
@@ -50,9 +51,6 @@ export default {
         }
     },
     methods: {
-        hidePopup(){
-            this.$emit('hidePopup');
-        },
         createTask(){
             let data = {
                 title : this.title,

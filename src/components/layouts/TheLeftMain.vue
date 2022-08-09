@@ -7,7 +7,7 @@
                 <input type="date" @change="getTasks" v-model="dateValue">
             </div>
 
-            <button class="tasks__add" @click="showPopup">Add Task</button>
+            <button class="tasks__add" @click="showPopup('new-task')">Add Task</button>
 
             <transition-group>
                 <div class="tasks__item mt-2" v-for="task in tasks" :key="task._id">
@@ -49,6 +49,7 @@ import UserService from '../../services/user.service';
 const {GetToday} = require('../../services/getToday')
 
 export default {
+    inject : ['showPopup'],
     data() {
         return {
             dateValue : GetToday()
@@ -60,9 +61,9 @@ export default {
         }
     },
     methods: { // log => 2023-12-10 
-        showPopup(){
-            this.$emit('showPopup' , 'new-task');
-        },
+        // showPopup(){
+        //     this.$emit('showPopup' , 'new-task');
+        // },
 
         getTasks(){
             this.$store.dispatch('getTasksbyDate' , this.dateValue);

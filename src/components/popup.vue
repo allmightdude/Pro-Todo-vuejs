@@ -39,6 +39,7 @@ export default {
         position: fixed;
         width: 100%;
         height: 100%;
+        top: 0;
         z-index: 100;
         display: flex;
         align-items: center;;

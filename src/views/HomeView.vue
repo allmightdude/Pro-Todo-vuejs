@@ -7,6 +7,9 @@
       :planItem="planItem"
     />
 
+    <TheHeader @showPopup="showPopup" />
+    <TheMain />
+
     <div class="btn-float">
       <button class="btn-main" @click="floatBtn()">
         <svg class="plus-icon">
@@ -39,17 +42,6 @@
         </li>
       </ul>
     </div>
-
-    <TheHeader @showPopup="showPopup" />
-
-    <div class="main">
-      <div class="container">
-        <div class="col-12">
-          <TheLeftMain @showPopup="showPopup" />
-          <TheMainRight @showPopup="showPopup" @showPlanPopup="showPlanPopup" />
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -57,8 +49,8 @@
 // console.log(getDatesBetween(firstDayWeek,lastDayWeek));
 
 import TheHeader from "../components/layouts/TheHeader.vue";
-import TheMainRight from "../components/layouts/TheMainRight.vue";
-import TheLeftMain from "../components/layouts/TheLeftMain.vue";
+
+import TheMain from "../components/layouts/TheMain.vue";
 
 import Popup from "../components/popup.vue";
 
@@ -76,31 +68,29 @@ export default {
       content: "",
       dateValue: null,
       tasks: [],
-      popupName : null
+      popupName: null,
     };
   },
   components: {
     TheHeader,
-    TheMainRight,
-    TheLeftMain,
+    TheMain,
     Popup,
   },
   methods: {
     showPopup(name) {
       this.showP = true;
       this.popupName = name;
-      
     },
     hidePopup() {
       this.showP = false;
       this.planItem = null;
-      this.popupName = null
-
+      this.popupName = null;
     },
     async showPlanPopup(id) {
       this.planItem = await this.$store.dispatch("getSinglePlan", id);
       this.showP = true;
     },
+    
     floatBtn() {
       if (
         document.querySelector(".btn-main svg").classList.contains("plus-icon")
@@ -127,6 +117,15 @@ export default {
       }
     },
   },
+
+  provide(){
+    return{
+      showPopup : this.showPopup,
+      hidePopup : this.hidePopup,
+      showPlanPopup : this.showPlanPopup
+    }
+  },
+
   async mounted() {
     this.dateValue = GetToday(); // log => 2023-12-10
     this.$store.dispatch("getTasksbyDate", this.dateValue);

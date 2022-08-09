@@ -50,6 +50,8 @@
 import UserService from "@/services/user.service";
 
 export default {
+  inject: ["hidePopup"],
+
   data() {
     return {
       title: "",
@@ -60,9 +62,6 @@ export default {
     };
   },
   methods: {
-    hidePopup() {
-      this.$emit("hidePopup");
-    },
     getTasks() {
       UserService.getTasksbyDate(this.dateValue)
         .then((res) => {

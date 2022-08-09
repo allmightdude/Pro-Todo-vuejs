@@ -2,7 +2,7 @@
 
         <div class="createTask__form">
             <form action="" class="form" @submit.prevent="createCategory">
-                <div class="form__header">New Plan</div>
+                <div class="form__header">New Category</div>
                 <div class="form__content">
                     <div class="form__group">
                         <label for="title" class="form__label">Title</label>
@@ -66,6 +66,7 @@
 import UserService from '@/services/user.service'
 
 export default {
+    inject : ['hidePopup'],
     data() {
         return {
             title : "",
@@ -104,10 +105,6 @@ export default {
 
 
         },
-
-        hidePopup(){
-            this.$emit('hidePopup');
-        }
     },
 }
 </script>
