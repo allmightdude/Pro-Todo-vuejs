@@ -29,7 +29,7 @@ export default {
     name : "categoriesCom",
     methods: {
         showPopup(){
-            this.$emit('showPopup' , 'newCat')
+            this.$emit('showPopup' , 'new-cat')
         }
     },
     computed : {

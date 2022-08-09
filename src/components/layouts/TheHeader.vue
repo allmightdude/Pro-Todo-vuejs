@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import Categories from './Categories.vue'
+import Categories from '../Categories.vue'
 // import EventBus from '../common/EventBus'
 
 export default {

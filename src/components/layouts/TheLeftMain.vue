@@ -38,8 +38,6 @@
                     </div>
 
                 </div>
-
-
             </transition-group>
         </div>
     </div>        
@@ -47,8 +45,8 @@
 
 <script>
 
-import UserService from '../services/user.service';
-const {GetToday} = require('../services/getToday')
+import UserService from '../../services/user.service';
+const {GetToday} = require('../../services/getToday')
 
 export default {
     data() {
@@ -63,7 +61,7 @@ export default {
     },
     methods: { // log => 2023-12-10 
         showPopup(){
-            this.$emit('showPopup' , 'task');
+            this.$emit('showPopup' , 'new-task');
         },
 
         getTasks(){

@@ -38,7 +38,7 @@
 <script>
 
 
-const {GetToday , moment} = require('../services/getToday');
+const {GetToday , moment} = require('../../services/getToday');
 
 export default {
     data() {
@@ -52,7 +52,7 @@ export default {
 
         },
         showPopup(){
-            this.$emit('showPopup' , 'plan')
+            this.$emit('showPopup' , 'new-plan')
         },
         showPlanPopup(id){
             this.$emit('showPlanPopup' , id)

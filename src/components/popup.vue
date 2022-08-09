@@ -1,30 +1,28 @@
 <template>
     <div class="popup">
         <div class="btn-close" @click="hidePopup">&#215;</div>
-        <CreateTask v-show="createTask" @hidePopup="hidePopup"/>
-        <CreatePlan v-show="createPlan" @hidePopup="hidePopup"/>
-        <CreateCat v-show="createCat" @hidePopup="hidePopup"/>
-        <ShowPlan v-show="planItem !== null" :planItem="planItem"/>
+        <component :is="popupName"></component>
+        <show-plan v-show="planItem !== null" :planItem="planItem"></show-plan>
     </div>
 </template>
 
 <script>
-import CreateTask from '../components/createTask.vue';
-import CreatePlan from '../components/createPlan.vue';
-import CreateCat from '../components/NewCat.vue';
-import ShowPlan from '../components/ShowPlan.vue';
+import NewTask from './popups/NewTask.vue';
+import NewPlan from './popups/NewPlan.vue';
+import NewCat from './popups/NewCat.vue';
+import ShowPlan from './popups/ShowPlan.vue';
 
 export default {
     name: 'popupPage',
-    props : ['createTask' , 'createPlan' , 'createCat' ,'planItem'],
+    props : ['popupName' ,'planItem'],
     data() {
         return {
         }
     },
     components : {
-        CreateTask,
-        CreatePlan,
-        CreateCat,
+        NewTask,
+        NewPlan,
+        NewCat,
         ShowPlan
     },
     methods: {
