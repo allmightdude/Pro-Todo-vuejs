@@ -2,7 +2,7 @@
     <div class="popup">
         <div class="btn-close" @click="hidePopup">&#215;</div>
         <component :is="popupName"></component>
-        <show-plan v-show="planItem !== null" :planItem="planItem"></show-plan>
+        <show-plan v-if="planItem !== null" :planItem="planItem"></show-plan>
     </div>
 </template>
 

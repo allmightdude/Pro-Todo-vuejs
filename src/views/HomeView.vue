@@ -61,8 +61,6 @@ import TheMainRight from "../components/layouts/TheMainRight.vue";
 import TheLeftMain from "../components/layouts/TheLeftMain.vue";
 
 import Popup from "../components/popup.vue";
-// import NewCat from '../components/NewCat.vue';
-// import UserService from '../services/user.service'
 
 const {
   GetToday,
