@@ -74,9 +74,6 @@ export default {
   data() {
     return {
       showP: false,
-      newTaskShow: false,
-      newPlanShow: false,
-      newCatShow: false,
       planItem: null,
       content: "",
       dateValue: null,
@@ -92,20 +89,15 @@ export default {
   },
   methods: {
     showPopup(name) {
-      // this.showP = true;
-      // if (popupBox == "task") this.newTaskShow = true;
-      // else if (popupBox == "plan") this.newPlanShow = true;
-      // else this.newCatShow = true;
       this.showP = true;
       this.popupName = name;
       
     },
     hidePopup() {
       this.showP = false;
-      this.newTaskShow = false;
-      this.newPlanShow = false;
-      this.newCatShow = false;
       this.planItem = null;
+      this.popupName = null
+
     },
     async showPlanPopup(id) {
       this.planItem = await this.$store.dispatch("getSinglePlan", id);
