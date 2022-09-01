@@ -46,7 +46,6 @@
 </template>
 
 <script>
-// console.log(getDatesBetween(firstDayWeek,lastDayWeek));
 
 import TheHeader from "../components/layouts/TheHeader.vue";
 
@@ -88,7 +87,7 @@ export default {
       this.popupName = null;
     },
     async showPlanPopup(id) {
-      this.planItem = await this.$store.dispatch("getSinglePlan", id);
+      this.planItem = await this.$store.dispatch("todo/getSinglePlan", id);
       this.showP = true;
     },
     
@@ -129,15 +128,15 @@ export default {
 
   mounted() {
     this.dateValue = GetToday(); // log => 2023-12-10
-    this.$store.dispatch("getTasksbyDate", this.dateValue);
-    this.$store.dispatch("getCategories");
+    this.$store.dispatch("todo/getTasksbyDate", this.dateValue);
+    this.$store.dispatch("todo/getCategories");
 
     let dates = getDatesBetween(
       getfirstLast().firstDayWeek,
       getfirstLast().lastDayWeek
     );
 
-    this.$store.dispatch("addPlans", dates);
+    this.$store.dispatch("todo/addPlans", dates);
   },
 };
 </script>

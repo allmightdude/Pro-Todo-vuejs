@@ -49,7 +49,7 @@ export default {
     },
     methods: {
         getPlans(){
-            this.$store.dispatch('getPlansByDate' , this.dateValue);
+            this.$store.dispatch('todo/getPlansByDate' , this.dateValue);
         },
         getDate(date){
             return moment(date)
@@ -57,7 +57,7 @@ export default {
     },
     computed :{
         plans(){
-            return this.$store.getters.getPlans
+            return this.$store.getters['todo/getPlans']
         }
     },
     mounted() {

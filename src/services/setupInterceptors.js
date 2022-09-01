@@ -40,7 +40,7 @@ const setup = (store) => {
 
                         const {accessToken} = rs.data;
 
-                        store.dispatch('auth/refreshToken' , accessToken)
+                        store.dispatch('/refreshToken' , accessToken)
 
                         TokenService.updateLocalAccessToken(accessToken);
 

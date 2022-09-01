@@ -2,16 +2,6 @@ import api from './api';
 
 class UserService {
 
-    // async getTasks(){
-    //     try {
-    //         let res = await api.get('tasks');
-    //         console.log(res.tasks);
-    //         return res
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-    
     async getTasksbyDate(date){
         try {
             let res = await api.get(`tasks/${date}`);

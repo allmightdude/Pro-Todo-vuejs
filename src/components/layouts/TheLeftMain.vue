@@ -57,22 +57,22 @@ export default {
     },
     computed: {
         tasks(){
-            return this.$store.getters.getTasks;
+            return this.$store.getters['todo/getTasks'];
         }
     },
     methods: { // log => 2023-12-10 
         getTasks(){
-            this.$store.dispatch('getTasksbyDate' , this.dateValue);
+            this.$store.dispatch('todo/getTasksbyDate' , this.dateValue);
         },
 
         checkTask(id){
-            this.$store.dispatch('checkTask' , id);
+            this.$store.dispatch('todo/checkTask' , id);
         },
 
         deleteTask(id){
             UserService.deleteTask(id)
                 .then(() => {
-                    this.$store.commit('removeTask' , id);
+                    this.$store.commit('todo/removeTask' , id);
                 })
         },
     }

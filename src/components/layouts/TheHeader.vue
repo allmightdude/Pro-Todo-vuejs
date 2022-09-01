@@ -26,7 +26,6 @@
 
 <script>
 import Categories from '../Categories.vue'
-// import EventBus from '../common/EventBus'
 
 export default {
     name : "HeaderSite",
@@ -35,7 +34,7 @@ export default {
     },
     methods: {
         logout(){
-            this.$store.dispatch('auth/logout');
+            this.$store.dispatch('logout');
             this.$router.push('/login')
         },
         showPopup(popupBox){
@@ -47,7 +46,7 @@ export default {
             return this.$store.state.auth.user
         },
         categories(){
-            return this.$store.getters.getCategories
+            return this.$store.getters['todo/getCategories']
         },
 
     }

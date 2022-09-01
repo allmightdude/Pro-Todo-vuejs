@@ -71,7 +71,7 @@ export default {
     methods: {
         login(){
             if(this.user.email && this.user.password){
-                this.$store.dispatch('auth/login' , this.user)
+                this.$store.dispatch('login' , this.user)
                     .then(
                         (data) => {
                             if(data.success) this.$router.push('/');

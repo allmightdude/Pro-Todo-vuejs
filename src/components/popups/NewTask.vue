@@ -62,7 +62,7 @@ export default {
             UserService.createTask(data)
                 .then(res => {
                     this.hidePopup();
-                    this.$store.commit('addTask', res.data.newTask);
+                    this.$store.commit('todo/addTask', res.data.newTask);
                     
                 }).catch(err => {
                     console.log(err);

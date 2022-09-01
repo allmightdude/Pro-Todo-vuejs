@@ -57,7 +57,7 @@ export default {
     },
     deletePlan(id) {
       UserService.deletePlan(id).then(() => {
-        this.$store.commit("removePlan", id);
+        this.$store.commit("todo/removePlan", id);
         this.hidePopup();
       });
     },

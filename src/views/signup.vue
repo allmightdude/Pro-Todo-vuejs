@@ -55,7 +55,7 @@ export default {
     },
     methods: {
         signup(){
-            this.$store.dispatch('auth/register' , this.user)
+            this.$store.dispatch('register' , this.user)
             .then(
                 data => {
                     if(data.success) this.$router.push('/');

@@ -4,13 +4,8 @@
 
 <script>
 
-import EventBus from './common/EventBus'
 export default {
-  mounted() {
-    EventBus.on("logout" , ()=>{
-      this.logout()
-    })
-  },
+
 }
 </script>
 

@@ -1,53 +1,55 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "../views/Home.vue";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
+    path: "/",
+    name: "home",
     component: Home,
 
     meta: {
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
   {
-    path: '/login',
-    name: 'login',
+    path: "/login",
+    name: "login",
 
-    component: () => import(/* webpackChunkName: "about" */ '../views/logIn.vue'),
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/logIn.vue"),
     meta: {
-      hideForAuth: true
-    }
+      hideForAuth: true,
+    },
   },
   {
-    path: '/signup',
-    name: 'signup',
+    path: "/signup",
+    name: "signup",
 
-    component: () => import(/* webpackChunkName: "about" */ '../views/signup.vue')
-  }
-
-]
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/signup.vue"),
+    hideForAuth: true,
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/login' , '/signup'];
+  const publicPages = ["/login", "/signup"];
   const authRequired = !publicPages.includes(to.path);
-  const loggedIn = localStorage.getItem('user');
+  const loggedIn = localStorage.getItem("user");
 
-  if(authRequired && !loggedIn){
-    next('/login');
-  }else{
+  if (authRequired && !loggedIn) {
+    next("/login");
+  } else {
     next();
   }
 });
 
-export default router
+export default router;

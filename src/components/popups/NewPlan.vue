@@ -105,7 +105,7 @@ export default {
 
   computed: {
     cats() {
-      return this.$store.getters.getCategories;
+      return this.$store.getters['todo/getCategories'];
     },
   },
 };

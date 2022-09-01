@@ -1,4 +1,4 @@
-const { GetToday } = require("../services/getToday");
+const { GetToday } = require("@/services/getToday");
 const today = GetToday();
 
 export default {

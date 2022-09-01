@@ -1,7 +1,5 @@
-
-// module store options
-import authMutations from './mutation.js';
-import authActions from './actions.js';
+import mutations from './mutation.js';
+import actions from './actions.js';
  
 const user = JSON.parse(localStorage.getItem('user'));
 
@@ -10,10 +8,8 @@ const initialState = user
     : {status : {loggedIn : false} , user : null};
 
 
-export const auth = {
-    namespaced : true,
+export default {
     state: initialState,
-
-    mutations : authMutations,
-    actions : authActions,
+    mutations,
+    actions
 }

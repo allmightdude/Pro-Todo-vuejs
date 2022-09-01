@@ -77,7 +77,7 @@ export default {
         createCategory(){
             UserService.createCategory({category : this.category})
                 .then(() => {
-                    this.$store.commit('addCategory' , this.category);
+                    this.$store.commit('todo/addCategory' , this.category);
                     this.hidePopup()
                 })
                 .catch(err => {

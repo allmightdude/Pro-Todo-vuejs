@@ -1,12 +1,10 @@
-import UserService from "../services/user.service";
-import EventBus from "../common/EventBus";
+import UserService from "@/services/user.service";
 
 export default {
   getTasksbyDate({ commit }, date) {
     UserService.getTasksbyDate(date)
       .then((res) => {
         commit("storeTasks", res.data.tasks);
-        console.log(res);
       })
       .catch((error) => {
         console.log(error);
@@ -30,7 +28,7 @@ export default {
       },
       (error) => {
         if (error.response && error.response.status === 401) {
-          EventBus.dispatch("logout");
+          // EventBus.dispatch("logout");
         }
       }
     );
