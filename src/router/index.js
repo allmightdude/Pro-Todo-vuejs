@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import store from "../store/index";
 
 Vue.use(VueRouter);
 
@@ -32,6 +33,11 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/signup.vue"),
     hideForAuth: true,
   },
+  {
+    path: "/:notFound(.*)",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/NotFound.vue"),
+  },
 ];
 
 const router = new VueRouter({
@@ -40,14 +46,12 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  const publicPages = ["/login", "/signup"];
-  const authRequired = !publicPages.includes(to.path);
-  const loggedIn = localStorage.getItem("user");
-
-  if (authRequired && !loggedIn) {
-    next("/login");
-  } else {
+router.beforeEach((to, _, next) => {
+  if (to.meta.requiresAuth && !store.getters.isLoggedIn) {
+    next({ path: "/login" });
+  } else if(to.meta.hideForAuth && store.getters.isLoggedIn) {
+    next({path : '/'});
+  }else{
     next();
   }
 });

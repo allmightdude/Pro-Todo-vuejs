@@ -1,18 +1,20 @@
 import UserService from "@/services/user.service";
 
 export default {
-  getTasksbyDate({ commit }, date) {
-    UserService.getTasksbyDate(date)
+  async getTasksbyDate({ commit }, date) {
+    await UserService.getTasksbyDate(date)
       .then((res) => {
-        commit("storeTasks", res.data.tasks);
+        if (res) {
+          commit("storeTasks", res.data.tasks);
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   },
 
-  getPlansByDate({ commit }, date) {
-    UserService.getPlansByDate(date)
+  async getPlansByDate({ commit }, date) {
+    await UserService.getPlansByDate(date)
       .then((plans) => {
         commit("addPlans", plans);
       })
@@ -21,10 +23,12 @@ export default {
       });
   },
 
-  getCategories({ commit }) {
-    UserService.getCategories().then(
+  async getCategories(context) {
+    await UserService.getCategories().then(
       (res) => {
-        commit("addCategories", res.data.cats);
+        if (res) {
+          context.commit("addCategories", res.data.cats);
+        }
       },
       (error) => {
         if (error.response && error.response.status === 401) {
@@ -34,14 +38,16 @@ export default {
     );
   },
 
-  addPlans({ commit }, dates) {
-    UserService.getWeekPlans(dates).then((res) => {
-      commit("addPlans", res.data.plans);
+  async addPlans({ commit }, dates) {
+    await UserService.getWeekPlans(dates).then((res) => {
+      if (res) {
+        commit("addPlans", res.data.plans);
+      }
     });
   },
 
-  checkTask({ commit }, id) {
-    UserService.checkTask(id)
+  async checkTask({ commit }, id) {
+    await UserService.checkTask(id)
       .then(() => {
         commit("checkTask", id);
       })

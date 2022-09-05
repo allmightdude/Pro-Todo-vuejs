@@ -61,8 +61,8 @@ export default {
         }
     },
     methods: { // log => 2023-12-10 
-        getTasks(){
-            this.$store.dispatch('todo/getTasksbyDate' , this.dateValue);
+        async getTasks(){
+            await this.$store.dispatch('todo/getTasksbyDate' , this.dateValue);
         },
 
         checkTask(id){

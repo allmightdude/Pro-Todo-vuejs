@@ -1,43 +1,54 @@
-import api from './api';
-import TokenService from './token.service';
-// const API_URL = `http://localhost:3000/users/`;
+import api from "./api";
+import TokenService from "./token.service";
 
 class AuthService {
-    async login(user){
-        return await api
-            .post('users/login' , {
-                email : user.email,
-                password : user.password,
-            })
-            .then(res => {
-                if(res.data.accessToken){
-                    // localStorage.setItem('user' , JSON.stringify(res.data))
-                    TokenService.setUser(res.data)
-                }
-                return res.data
-            })
-    }
+  async login(user) {
+    // return await api
+    //     .post('users/login' , {
+    //         email : user.email,
+    //         password : user.password,
+    //     })
+    //     .then(res => {
+    //         console.log(res.data);
+    //         if(res.data.accessToken){
+    //             TokenService.setUser(res.data)
+    //         }
+    //         return res.data
+    //     })
+    return await api.post("users/login", {
+      email: user.email,
+      password: user.password,
+    });
+  }
 
-    logout(){
-        // localStorage.removeItem('user');
-        TokenService.removeUser();
+  async logout() {
+    try {
+      return await api.post("users/logout", {
+        refreshToken: TokenService.getLocalRefreshToken(),
+      })
+    } catch (error) {
+      const err = new Error(
+        error.message || "can not logout on your acoount..."
+      );
+      throw err;
     }
+  }
 
-    async register(user){
-        return await api.post('users/signup' , {
-            name : user.name , 
-            email : user.email , 
-            password : user.password , 
-            password2 : user.password2 , 
-        })
-        .then(res => {
-            if(res.data.accessToken){
-                TokenService.setUser(res.data)
-            }
-            return res.data
-        })
-    }
+  async register(user) {
+    return await api
+      .post("users/signup", {
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        password2: user.password2,
+      })
+      .then((res) => {
+        if (res.data.accessToken) {
+          TokenService.setUser(res.data);
+        }
+        return res.data;
+      });
+  }
 }
 
-export default new AuthService()
-
+export default new AuthService();

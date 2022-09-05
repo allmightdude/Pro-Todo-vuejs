@@ -1,21 +1,27 @@
 export default {
   refreshToken(state, accessToken) {
-    state.status.loggedIn = true;
     state.user = { ...state.user, accessToken: accessToken };
   },
-  loginSuccess(state, user) {
-    state.status.loggedIn = true;
-    state.user = user;
+  setUser(state, user) {
+    state.user = {
+      email: user.email,
+      accessToken: user.accessToken,
+      expiryDate: user.expiryDate,
+      refreshToken : user.refreshToken, 
+      name: user.name,
+      id : user.id
+    };
+    state.didAutoLogout = false;
+    
   },
   loginFailure(state) {
-    state.status.loggedIn = false;
     state.user = null;
-  },
-  registerSuccess(state, user) {
-    state.status.loggedIn = false;
-    state.user = user;
+    state.didAutoLogout = false;
   },
   registerFailure(state) {
-    state.status.loggedIn = true;
+    state.didAutoLogout = false;
   },
-};
+  setDidAutoLogout(state) {
+    state.didAutoLogout = true;
+  },
+}

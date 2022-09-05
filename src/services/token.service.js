@@ -20,11 +20,18 @@ class TokenService{
     }
 
     setUser(user){
-        localStorage.setItem('user' , JSON.stringify(user))
+        localStorage.setItem('user' , JSON.stringify({
+            email: user.email,
+            accessToken: user.accessToken,
+            expiryDate: user.expiryDate,
+            refreshToken : user.refreshToken, 
+            name: user.name,
+            id : user.id
+        }));
     }
 
     removeUser(){
-        localStorage.removeItem('user')
+        localStorage.removeItem('user');
     }
     
 }

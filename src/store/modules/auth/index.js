@@ -1,15 +1,19 @@
-import mutations from './mutation.js';
-import actions from './actions.js';
- 
-const user = JSON.parse(localStorage.getItem('user'));
+import mutations from "./mutation.js";
+import actions from "./actions.js";
+import getters from "./getters";
 
-const initialState = user 
-    ? {status : { loggedIn : true} , user}
-    : {status : {loggedIn : false} , user : null};
+// const user = JSON.parse(localStorage.getItem("user"));
 
+// const initialState = user
+//   ? { status: { loggedIn: true }, user }
+//   : { status: { loggedIn: false }, user: null };
 
 export default {
-    state: initialState,
-    mutations,
-    actions
-}
+  state: {
+    user : null,
+    didAutoLogout : false,
+  },
+  getters,
+  mutations,
+  actions,
+};

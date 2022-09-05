@@ -60,7 +60,7 @@ export default {
             return this.$store.getters['todo/getPlans']
         }
     },
-    mounted() {
+    created() {
         this.dateValue = GetToday();
     },
 }

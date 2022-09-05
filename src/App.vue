@@ -5,6 +5,18 @@
 <script>
 
 export default {
+  computed :{
+    didAutoLogout(){
+      return this.$store.getters['didAutoLogout'];
+    }
+  },
+  watch : {
+    didAutoLogout(newValue , oldValue){
+      if(!newValue && newValue !== oldValue){
+        this.$router.replace('/login');
+      } 
+    }
+  },
 
 }
 </script>
