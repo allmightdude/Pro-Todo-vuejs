@@ -9,7 +9,6 @@ export default {
   },
 
   async login(context, user) {
-
     try {
       let res = await AuthService.login(user);
       context.commit("setUser", res.data);
@@ -54,20 +53,17 @@ export default {
   },
   tryLogin(context) {
     const user = JSON.parse(localStorage.getItem("user"));
-    const tokenExpiration = user.expiryDate;
-    const expiresIn = tokenExpiration - new Date().getTime();
-
-    console.log(+tokenExpiration);
+    // const tokenExpiration = user.expiryDate;
+    const tokenExpiration = new Date(user.refreshToken.expiryDate).getTime();
+    const expiresIn = +tokenExpiration - new Date().getTime();
 
     if (expiresIn < 0) {
       return;
     }
 
-
     timer = setTimeout(() => {
-      console.log('auto logout');
-      context.dispatch('autoLogout');
-    }, 10000);
+      context.dispatch("autoLogout");
+    }, expiresIn);
 
     if (user) {
       context.commit("setUser", user);

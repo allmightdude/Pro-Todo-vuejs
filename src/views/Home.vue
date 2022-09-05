@@ -126,7 +126,9 @@ export default {
     }
   },
 
-  created() {
+  async created() {
+    await this.$store.dispatch("tryLogin");
+
     this.dateValue = GetToday(); // log => 2023-12-10
     this.$store.dispatch("todo/getTasksbyDate", this.dateValue);
     this.$store.dispatch("todo/getCategories");
@@ -138,7 +140,6 @@ export default {
 
     this.$store.dispatch("todo/addPlans", dates);
 
-    this.$store.dispatch("tryLogin");
   },
 };
 </script>

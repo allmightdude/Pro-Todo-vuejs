@@ -6,7 +6,6 @@ export default {
     state.user = {
       email: user.email,
       accessToken: user.accessToken,
-      expiryDate: user.expiryDate,
       refreshToken : user.refreshToken, 
       name: user.name,
       id : user.id
