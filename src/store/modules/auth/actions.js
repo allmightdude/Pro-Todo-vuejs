@@ -9,16 +9,6 @@ export default {
   },
 
   async login(context, user) {
-    // return AuthService.login(user).then(
-    //   (user) => {
-    //     commit("setUser", user);
-    //     return Promise.resolve(user);
-    //   },
-    //   (error) => {
-    //     commit("loginFailure");
-    //     return Promise.reject(error);
-    //   }
-    // );
 
     try {
       let res = await AuthService.login(user);
@@ -32,7 +22,6 @@ export default {
       );
       throw err;
     }
-    // console.log(res);
   },
   register({ commit }, user) {
     return AuthService.register(user).then(
@@ -47,11 +36,12 @@ export default {
     );
   },
   async logout(context) {
+    context.commit("loginFailure");
+
     try {
       let res = await AuthService.logout();
       if (res.data.success) {
         TokenService.removeUser();
-        context.commit("loginFailure");
       }
     } catch (error) {
       console.log(error);
@@ -65,14 +55,18 @@ export default {
   tryLogin(context) {
     const user = JSON.parse(localStorage.getItem("user"));
     const tokenExpiration = user.expiryDate;
-    const expiresIn = +tokenExpiration - new Date().getTime();
+    const expiresIn = tokenExpiration - new Date().getTime();
+
+    console.log(+tokenExpiration);
 
     if (expiresIn < 0) {
       return;
     }
 
+
     timer = setTimeout(() => {
-      context.dispatch("autoLogout");
+      console.log('auto logout');
+      context.dispatch('autoLogout');
     }, 10000);
 
     if (user) {

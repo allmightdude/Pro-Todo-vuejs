@@ -12,7 +12,6 @@ export default {
       id : user.id
     };
     state.didAutoLogout = false;
-    
   },
   loginFailure(state) {
     state.user = null;

@@ -12,7 +12,7 @@ export default {
   },
   watch : {
     didAutoLogout(newValue , oldValue){
-      if(!newValue && newValue !== oldValue){
+      if(newValue && newValue !== oldValue){
         this.$router.replace('/login');
       } 
     }
