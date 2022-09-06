@@ -81,10 +81,22 @@ export default {
 
   async addCategory(context, payload) {
     try {
-      let res = await UserService.createCategory({ category : payload.category});
+      let res = await UserService.createCategory({
+        category: payload.category,
+      });
       if (res.data.success) {
         context.commit("addCategory", payload.category);
       }
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  async addTask(context, payload) {
+    try {
+      let res = await UserService.createTask(payload.task);
+      if(res.data.success)
+        context.commit('addTask', res.data.newTask);
     } catch (error) {
       console.log(error);
     }
