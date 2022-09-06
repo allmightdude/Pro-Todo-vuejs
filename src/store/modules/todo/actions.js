@@ -2,15 +2,14 @@ import UserService from "@/services/user.service";
 
 export default {
   async getTasksbyDate({ commit }, date) {
-    await UserService.getTasksbyDate(date)
-      .then((res) => {
-        if (res) {
-          commit("storeTasks", res.data.tasks);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const res = await UserService.getTasksbyDate(date);
+      if (res.data.tasks) {
+        commit("storeTasks", res.data.tasks);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   },
 
   async getPlansByDate({ commit }, date) {
@@ -95,16 +94,15 @@ export default {
   async addTask(context, payload) {
     try {
       let res = await UserService.createTask(payload.task);
-      if(res.data.success)
-        context.commit('addTask', res.data.newTask);
+      if (res.data.success) context.commit("addTask", res.data.newTask);
     } catch (error) {
       console.log(error);
     }
   },
 
-  async deleteTask(context , payload){
+  async deleteTask(context, payload) {
     const res = await UserService.deleteTask(payload.id);
     console.log(res);
     context.commit("removeTask", payload.id);
-  }
+  },
 };
