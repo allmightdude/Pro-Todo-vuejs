@@ -37,7 +37,12 @@
           </div>
 
           <div class="form__group">
-            <button href="" class="form__submit" type="submit">Login</button>
+            <button href="" class="form__submit" type="submit">
+              <span v-if="!isLoading">login</span>
+              <span v-else>
+                <base-spinner></base-spinner>
+              </span>
+            </button>
           </div>
 
           <div class="form__group form__group--row">
@@ -63,31 +68,21 @@ export default {
       user: new User("", ""),
       message: "",
       showError: false,
+      isLoading: false,
     };
   },
   methods: {
     async login() {
-      // if (this.user.email && this.user.password) {
-      //   this.$store.dispatch("login", this.user).then((data) => {
-      //     if (data.success) this.$router.push("/");
-      //     else {
-      //       this.message = data.msg;
-      //       this.showError = true;
-      //       setTimeout(() => {
-      //         this.showError = false;
-      //       }, 3000);
-      //     }
-      //   });
-      // }
+      this.isLoading = true;
       try {
-        let res = await this.$store.dispatch('login' , this.user);
-        if(res.status === 200){
-           this.$router.replace('/');
+        let res = await this.$store.dispatch("login", this.user);
+        if (res.status === 200) {
+          this.$router.replace("/");
         }
-
       } catch (error) {
-        this.error = error.message || 'Cant login , Try Again Later...'
+        this.error = error.message || "Cant login , Try Again Later...";
       }
+      this.isLoading = true;
     },
     showPassword() {
       let input = document.querySelector("#password");

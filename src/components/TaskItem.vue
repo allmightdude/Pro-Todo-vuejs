@@ -1,6 +1,6 @@
 <template>
-  <transition name="task-item">
-    <div class="tasks__item mt-2">
+  <transition name="task-item" >
+    <base-card class="tasks__item mt-1">
       <svg
         v-if="!taskItem.checked"
         class="circle-icon"
@@ -29,7 +29,7 @@
           <use xlink:href="@/assets/sprite.svg#icon-trash"></use>
         </svg>
       </div>
-    </div>
+    </base-card>
   </transition>
 </template>
 

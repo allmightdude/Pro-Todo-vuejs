@@ -37,7 +37,7 @@ export default {
     );
   },
 
-  async addPlans({ commit }, dates) {
+  async getPlans({ commit }, dates) {
     await UserService.getWeekPlans(dates).then((res) => {
       if (res) {
         commit("setPlans", res.data.plans);

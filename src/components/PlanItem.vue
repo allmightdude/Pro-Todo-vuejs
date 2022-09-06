@@ -1,5 +1,5 @@
 <template>
-  <li class="plans__item" @click="showPlanPopup(planItem._id)">
+  <base-card type="col" @click="showPlanPopup(planItem._id)">
     <div class="plans__icon">
       <svg v-if="planItem.category" :class="planItem.category.icon + '-icon'">
         <use
@@ -16,7 +16,7 @@
       <!-- August, 9 Sun -->
       {{ getDate(planItem.date) }}
     </span>
-  </li>
+  </base-card>
 </template>
 
 <script>

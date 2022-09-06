@@ -11,7 +11,7 @@
       />
 
       <div class="plans">
-        <transition-group tag="ul" name="plan-list">
+        <transition-group name="plan-list" v-if="hasPlans">
           <plan-item
             v-for="plan in plans"
             :key="plan._id"
@@ -19,11 +19,12 @@
           ></plan-item>
         </transition-group>
 
-        <div class="plans__item" @click="showPopup('new-plan')">
-          <svg class="plus-icon">
+        <base-card @click="showPopup('new-plan')" type="col">
+          <base-spinner v-if="!hasPlans"></base-spinner>
+          <svg class="plus-icon" v-else>
             <use xlink:href="@/assets/sprite.svg#icon-plus"></use>
           </svg>
-        </div>
+        </base-card>
       </div>
     </div>
   </div>
@@ -52,6 +53,9 @@ export default {
     plans() {
       return this.$store.getters["todo/getPlans"];
     },
+    hasPlans() {
+      return this.$store.getters["todo/hasPlans"];
+    },
   },
   created() {
     this.dateValue = GetToday();
@@ -60,14 +64,14 @@ export default {
 </script>
 
 <style lang="scss">
-
-.plans{
-  ul{
-    display: flex;
-    gap : 2rem
+.plans {
+  ul {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(max-content, 13rem));
   }
 }
-.plans__item {
+.plans {
   .plus-icon {
     width: 3rem;
     height: 3rem;
@@ -93,7 +97,7 @@ export default {
   transition: all 0.3s ease-out;
 }
 .plan-list-leave-to {
-    opacity: 0;
-    transform: translateX(-10px);
+  opacity: 0;
+  transform: translateX(-10px);
 }
 </style>

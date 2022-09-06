@@ -11,10 +11,15 @@
         Add Task
       </button>
 
+      <base-card class="mt-1" v-if="!hasTasks">
+        <base-spinner></base-spinner>
+      </base-card>
+
       <task-item
         v-for="task in tasks"
         :key="task._id"
         :taskItem="task"
+        v-else
       ></task-item>
     </div>
   </div>
@@ -30,6 +35,7 @@ export default {
   data() {
     return {
       dateValue: GetToday(),
+      isLoading: false,
     };
   },
   components: {
@@ -39,16 +45,24 @@ export default {
     tasks() {
       return this.$store.getters["todo/getTasks"];
     },
+    hasTasks() {
+      return this.$store.getters["todo/hasTasks"];
+    },
   },
   methods: {
     // log => 2023-12-10
     async getTasks() {
-      await this.$store.dispatch("todo/getTasksbyDate", this.dateValue);
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch("todo/getTasksbyDate", this.dateValue);
+      } catch (error) {
+        console.log(error);
+      }
+      this.isLoading = false
     },
   },
   mounted() {
-      console.log(this.dateValue);
-    
+    console.log(this.dateValue);
   },
 };
 </script>

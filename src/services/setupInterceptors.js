@@ -18,6 +18,8 @@ const setup = (store) => {
 
   axiosInstance.interceptors.response.use(
     (res) => {
+      console.log(res);
+
       return res;
     },
     async (err) => {

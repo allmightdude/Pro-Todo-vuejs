@@ -1,5 +1,9 @@
 <template>
   <div>
+    <!-- <base-modal :show="!!error" title="an error occured">
+      <p>{{error}}</p>
+    </base-modal> -->
+
     <Popup
       v-show="showP"
       @hidePopup="hidePopup"
@@ -46,7 +50,6 @@
 </template>
 
 <script>
-
 import TheHeader from "../components/layouts/TheHeader.vue";
 
 import TheMain from "../components/layouts/TheMain.vue";
@@ -60,15 +63,15 @@ const {
 } = require("../services/getToday");
 
 export default {
-  name : "HomeView",
+  name: "HomeView",
   data() {
     return {
       showP: false,
       planItem: null,
       content: "",
-      dateValue: null,
-      tasks: [],
+      dateValue: GetToday(),
       popupName: null,
+      error: null,
     };
   },
   components: {
@@ -90,7 +93,7 @@ export default {
       this.planItem = await this.$store.dispatch("todo/getSinglePlan", id);
       this.showP = true;
     },
-    
+
     floatBtn() {
       if (
         document.querySelector(".btn-main svg").classList.contains("plus-icon")
@@ -118,27 +121,32 @@ export default {
     },
   },
 
-  provide(){
-    return{
-      showPopup : this.showPopup,
-      hidePopup : this.hidePopup,
-      showPlanPopup : this.showPlanPopup
-    }
+  provide() {
+    return {
+      showPopup: this.showPopup,
+      hidePopup: this.hidePopup,
+      showPlanPopup: this.showPlanPopup,
+    };
   },
 
   async created() {
-    await this.$store.dispatch("tryLogin");
-
     this.dateValue = GetToday(); // log => 2023-12-10
-    this.$store.dispatch("todo/getTasksbyDate", this.dateValue);
-    this.$store.dispatch("todo/getCategories");
 
     let dates = getDatesBetween(
       getfirstLast().firstDayWeek,
       getfirstLast().lastDayWeek
     );
 
-    this.$store.dispatch("todo/addPlans", dates);
+    try {
+      await this.$store.dispatch("tryLogin");
+      await this.$store.dispatch("todo/getCategories");
+      await this.$store.dispatch("todo/getTasksbyDate", this.dateValue);
+      await this.$store.dispatch("todo/getPlans", dates);
+    } catch (error) {
+      console.log(error);
+      this.error = error.message || 'Can not establish to server for get your data.try again later'
+    }
+
 
   },
 };

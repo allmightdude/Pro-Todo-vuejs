@@ -15,10 +15,6 @@ import ShowPlan from './popups/ShowPlan.vue';
 export default {
     name: 'popupPage',
     props : ['popupName' ,'planItem'],
-    data() {
-        return {
-        }
-    },
     components : {
         NewTask,
         NewPlan,
