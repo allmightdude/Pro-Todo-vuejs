@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import UserService from "../services/user.service";
 
 export default {
   props: ["taskItem"],
@@ -44,10 +43,12 @@ export default {
       this.$store.dispatch("todo/checkTask", id);
     },
 
-    deleteTask(id) {
-      UserService.deleteTask(id).then(() => {
-        this.$store.commit("todo/removeTask", id);
-      });
+    async deleteTask(id) {
+      try {
+        this.$store.dispatch('todo/deleteTask' , {id : id});
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };

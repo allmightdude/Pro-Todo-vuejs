@@ -101,4 +101,10 @@ export default {
       console.log(error);
     }
   },
+
+  async deleteTask(context , payload){
+    const res = await UserService.deleteTask(payload.id);
+    console.log(res);
+    context.commit("removeTask", payload.id);
+  }
 };
