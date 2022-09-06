@@ -63,7 +63,6 @@
 </template>
 
 <script>
-import UserService from '@/services/user.service'
 
 export default {
     inject : ['hidePopup'],
@@ -74,15 +73,22 @@ export default {
         }
     },
     methods: {
-        createCategory(){
-            UserService.createCategory({category : this.category})
-                .then(() => {
-                    this.$store.commit('todo/addCategory' , this.category);
-                    this.hidePopup()
-                })
-                .catch(err => {
-                    console.log(err);
-                })
+        async createCategory(){
+            // UserService.createCategory({category : this.category})
+            //     .then(() => {
+            //         this.$store.commit('todo/addCategory' , this.category);
+            //         this.hidePopup()
+            //     })
+            //     .catch(err => {
+            //         console.log(err);
+            //     })
+
+            try {
+                await this.$store.dispatch("todo/addCategory" , {category : this.category});
+            } catch (error) {
+                console.log(error);
+            }
+            this.hidePopup(0);
         },
 
         setCetegory(event){

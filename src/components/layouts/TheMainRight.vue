@@ -60,6 +60,13 @@ export default {
 </script>
 
 <style lang="scss">
+
+.plans{
+  ul{
+    display: flex;
+    gap : 2rem
+  }
+}
 .plans__item {
   .plus-icon {
     width: 3rem;

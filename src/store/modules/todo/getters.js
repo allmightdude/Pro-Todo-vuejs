@@ -8,5 +8,5 @@ export default {
     },
     getPlans(state) {
       return state.plans;
-    },
+    }
   }

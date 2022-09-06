@@ -46,6 +46,10 @@ export default {
       await this.$store.dispatch("todo/getTasksbyDate", this.dateValue);
     },
   },
+  mounted() {
+      console.log(this.dateValue);
+    
+  },
 };
 </script>
 

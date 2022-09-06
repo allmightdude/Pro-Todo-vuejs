@@ -16,7 +16,7 @@ export default {
   async getPlansByDate({ commit }, date) {
     await UserService.getPlansByDate(date)
       .then((plans) => {
-        commit("addPlans", plans);
+        commit("setPLans", plans);
       })
       .catch((err) => {
         console.log(err);
@@ -27,7 +27,7 @@ export default {
     await UserService.getCategories().then(
       (res) => {
         if (res) {
-          context.commit("addCategories", res.data.cats);
+          context.commit("setCategories", res.data.cats);
         }
       },
       (error) => {
@@ -41,7 +41,7 @@ export default {
   async addPlans({ commit }, dates) {
     await UserService.getWeekPlans(dates).then((res) => {
       if (res) {
-        commit("addPlans", res.data.plans);
+        commit("setPlans", res.data.plans);
       }
     });
   },
@@ -56,5 +56,37 @@ export default {
 
   async getSinglePlan({ state }, id) {
     return await state.plans.find((item) => item._id === id);
+  },
+
+  async addPlan(context, payload) {
+    try {
+      let res = await UserService.createPlan(payload);
+
+      if (res.data.success) {
+        const catID = res.data.newPlan.categoryID;
+        context.commit("amountCategory", { id: catID, mode: "inc" });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  async deletePlan(context, payload) {
+    let res = await UserService.deletePlan(payload.id);
+    if (res.data.success) {
+      const catID = res.data.deletedPlan.categoryID;
+      context.commit("amountCategory", { id: catID, mode: "dec" });
+    }
+  },
+
+  async addCategory(context, payload) {
+    try {
+      let res = await UserService.createCategory({ category : payload.category});
+      if (res.data.success) {
+        context.commit("addCategory", payload.category);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   },
 };

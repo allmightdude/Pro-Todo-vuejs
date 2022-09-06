@@ -44,7 +44,6 @@
 
 <script>
 import { moment } from "@/services/getToday";
-import UserService from "../../services/user.service";
 
 export default {
   props: ["planItem"],
@@ -52,14 +51,16 @@ export default {
     getDate(date) {
       return moment(date);
     },
-    hidePopup(){
-        this.$emit('hidePopup');
+    hidePopup() {
+      this.$emit("hidePopup");
     },
-    deletePlan(id) {
-      UserService.deletePlan(id).then(() => {
-        this.$store.commit("todo/removePlan", id);
-        this.hidePopup();
-      });
+    async deletePlan(id) {
+      try {
+        this.$store.dispatch("todo/deletePlan", { id: id });
+      } catch (error) {
+        console.log(error);
+      }
+      this.hidePopup();
     },
   },
 };

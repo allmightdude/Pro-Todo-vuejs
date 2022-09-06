@@ -20,15 +20,27 @@ export default {
     state.plans = state.tasks.filter((plan) => plan._id !== id);
   },
 
-  addCategories(state, cats) {
+  setCategories(state, cats) {
     state.categories = cats;
   },
 
   addCategory(state, category) {
-    state.categories = [...state.categories, category];
+    state.categories = [...state.categories, {...category , items : 0}];
   },
 
-  addPlans(state, plans) {
+  amountCategory(state, payload) {
+    const catItem = state.categories.find((cat) => cat._id === payload.id);
+    if (payload.mode === "inc") {
+      catItem.items++;
+    } else {
+      if (catItem.items === 0) {
+        return;
+      }
+      catItem.items--;
+    }
+  },
+
+  setPlans(state, plans) {
     state.plans = plans;
   },
 

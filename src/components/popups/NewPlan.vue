@@ -81,7 +81,7 @@ export default {
         target.classList.add("active");
       }
     },
-    submitPlan() {
+    async submitPlan() {
       let plan = {
         title: this.title,
         date: this.dateValue,
@@ -93,19 +93,18 @@ export default {
         categoryID: this.selectedCategory._id,
       };
 
-      UserService.createPlan(plan)
-        .then(() => {
-          this.hidePopup();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      try {
+        await this.$store.dispatch("todo/addPlan", plan);
+      } catch (error) {
+        console.log(error);
+      }
+      this.hidePopup();
     },
   },
 
   computed: {
     cats() {
-      return this.$store.getters['todo/getCategories'];
+      return this.$store.getters["todo/getCategories"];
     },
   },
 };
