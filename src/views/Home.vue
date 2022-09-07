@@ -56,12 +56,6 @@ import TheMain from "../components/layouts/TheMain.vue";
 
 import Popup from "../components/popup.vue";
 
-const {
-  GetToday,
-  getfirstLast,
-  getDatesBetween,
-} = require("../services/getToday");
-
 export default {
   name: "HomeView",
   data() {
@@ -69,7 +63,6 @@ export default {
       showP: false,
       planItem: null,
       content: "",
-      dateValue: GetToday(),
       popupName: null,
       error: null,
     };
@@ -130,18 +123,8 @@ export default {
   },
 
   async created() {
-    this.dateValue = GetToday(); // log => 2023-12-10
-
-    let dates = getDatesBetween(
-      getfirstLast().firstDayWeek,
-      getfirstLast().lastDayWeek
-    );
-
     try {
       await this.$store.dispatch("tryLogin");
-      await this.$store.dispatch("todo/getCategories");
-      await this.$store.dispatch("todo/getTasksbyDate", this.dateValue);
-      await this.$store.dispatch("todo/getPlans", dates);
     } catch (error) {
       console.log(error);
       this.error = error.message || 'Can not establish to server for get your data.try again later'

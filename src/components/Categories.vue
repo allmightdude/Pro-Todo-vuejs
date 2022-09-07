@@ -17,7 +17,7 @@
     </div>
 
     <div class="plans__item" @click="showPopup">
-        <base-spinner v-if="!hasCategories"></base-spinner>
+      <base-spinner v-if="!hasCategories && isLoading"></base-spinner>
 
       <svg class="plus-icon" v-else>
         <use xlink:href="@/assets/sprite.svg#icon-plus"></use>
@@ -29,18 +29,35 @@
 <script>
 export default {
   name: "categoriesCom",
-  methods: {
-    showPopup() {
-      this.$emit("showPopup", "new-cat");
-    },
+  data() {
+    return {
+      isLoading: false,
+    };
   },
   computed: {
     categories() {
       return this.$store.getters["todo/getCategories"];
     },
-    hasCategories(){
-        return this.$store.getters["todo/hasCategories"]
-    }
+    hasCategories() {
+      return this.$store.getters["todo/hasCategories"];
+    },
+  },
+  methods: {
+    showPopup() {
+      this.$emit("showPopup", "new-cat");
+    },
+    async getCategories() {
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch("todo/getCategories");
+      } catch (error) {
+        console.log(error);
+      }
+      this.isLoading = false;
+    },
+  },
+  created() {
+    this.getCategories();
   },
 };
 </script>

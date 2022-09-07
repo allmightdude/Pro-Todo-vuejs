@@ -6,7 +6,7 @@
       <input
         type="date"
         v-model="dateValue"
-        @change.prevent="getPlans"
+        @change.prevent="getPlansByDate"
         class="mt-2"
       />
 
@@ -20,7 +20,7 @@
         </transition-group>
 
         <base-card @click="showPopup('new-plan')" type="col">
-          <base-spinner v-if="!hasPlans"></base-spinner>
+          <base-spinner v-if="!hasPlans && isLoading"></base-spinner>
           <svg class="plus-icon" v-else>
             <use xlink:href="@/assets/sprite.svg#icon-plus"></use>
           </svg>
@@ -31,22 +31,47 @@
 </template>
 
 <script>
-const { GetToday } = require("../../services/getToday");
+const {
+  GetToday,
+  getfirstLast,
+  getDatesBetween,
+} = require("../../services/getToday");
 import PlanItem from "../PlanItem.vue";
 
 export default {
   inject: ["showPopup"],
   data() {
     return {
-      dateValue: null,
+      dateValue: GetToday(),
+      isLoading: false,
     };
   },
   components: {
     PlanItem,
   },
   methods: {
-    getPlans() {
-      this.$store.dispatch("todo/getPlansByDate", this.dateValue);
+    async getPlansByDate() {
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch("todo/getPlansByDate", this.dateValue);
+      } catch (error) {
+        console.log(error);
+      }
+      this.isLoading = false;
+    },
+    async getWeekPlans() {
+      this.isLoading = true;
+      let dates = getDatesBetween(
+        getfirstLast().firstDayWeek,
+        getfirstLast().lastDayWeek
+      );
+
+      try {
+        await this.$store.dispatch("todo/getPlans", dates);
+      } catch (error) {
+        console.log(error);
+      }
+      this.isLoading = false;
     },
   },
   computed: {
@@ -58,7 +83,7 @@ export default {
     },
   },
   created() {
-    this.dateValue = GetToday();
+    this.getWeekPlans();
   },
 };
 </script>

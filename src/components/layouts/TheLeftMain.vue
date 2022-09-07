@@ -11,8 +11,12 @@
         Add Task
       </button>
 
-      <base-card class="mt-1" v-if="!hasTasks">
+      <base-card class="mt-1" v-if="!hasTasks && isLoading">
         <base-spinner></base-spinner>
+      </base-card>
+      
+      <base-card class="mt-1" v-else-if="!hasTasks">
+        <p>there aren't any task...</p>
       </base-card>
 
       <task-item
@@ -61,9 +65,9 @@ export default {
       this.isLoading = false
     },
   },
-  mounted() {
-    console.log(this.dateValue);
-  },
+  created() {
+    this.getTasks();
+  }
 };
 </script>
 
