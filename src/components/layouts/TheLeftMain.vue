@@ -4,7 +4,12 @@
       <h3 class="heading-3 text-blue">Daily Tasks</h3>
 
       <div class="tasks__option mt-1">
-        <input type="date" @change="getTasks" v-model="dateValue" />
+        <input
+          v-on="listeners"
+          class="col-12"
+          type="date"
+          v-model="dateValue"
+        />
       </div>
 
       <button class="tasks__add" @click="showPopup('new-task')">
@@ -14,7 +19,7 @@
       <base-card class="mt-1" v-if="!hasTasks && isLoading">
         <base-spinner></base-spinner>
       </base-card>
-      
+
       <base-card class="mt-1" v-else-if="!hasTasks">
         <p>there aren't any task...</p>
       </base-card>
@@ -30,6 +35,7 @@
 </template>
 
 <script>
+import { debounce } from "@/assets/helpers/utils";
 import TaskItem from "../TaskItem.vue";
 
 const { GetToday } = require("../../services/getToday");
@@ -42,32 +48,42 @@ export default {
       isLoading: false,
     };
   },
+
   components: {
     TaskItem,
   },
+
   computed: {
+    listeners () {
+      return {
+        input : debounce(this.getTasks(), 4000)
+      }
+    },
+
     tasks() {
       return this.$store.getters["todo/getTasks"];
     },
+
     hasTasks() {
       return this.$store.getters["todo/hasTasks"];
     },
   },
+
   methods: {
-    // log => 2023-12-10
     async getTasks() {
       this.isLoading = true;
+      
       try {
         await this.$store.dispatch("todo/getTasksbyDate", this.dateValue);
       } catch (error) {
-        console.log(error);
+        error;
       }
-      this.isLoading = false
+      this.isLoading = false;
     },
   },
   created() {
     this.getTasks();
-  }
+  },
 };
 </script>
 
@@ -76,7 +92,7 @@ export default {
   &__add {
     background: #00cbe5;
     padding: 1.5rem;
-    border-radius: 14px;
+    border-radius: 10px;
     width: 100%;
     color: white;
     margin-top: 1.54rem;

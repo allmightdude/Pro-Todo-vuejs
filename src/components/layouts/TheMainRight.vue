@@ -21,6 +21,7 @@
 
         <base-card @click="showPopup('new-plan')" type="col">
           <base-spinner v-if="!hasPlans && isLoading"></base-spinner>
+          
           <svg class="plus-icon" v-else>
             <use xlink:href="@/assets/sprite.svg#icon-plus"></use>
           </svg>
@@ -40,6 +41,7 @@ import PlanItem from "../PlanItem.vue";
 
 export default {
   inject: ["showPopup"],
+  
   data() {
     return {
       dateValue: GetToday(),
@@ -55,7 +57,7 @@ export default {
       try {
         await this.$store.dispatch("todo/getPlansByDate", this.dateValue);
       } catch (error) {
-        console.log(error);
+         (error);
       }
       this.isLoading = false;
     },
@@ -69,7 +71,7 @@ export default {
       try {
         await this.$store.dispatch("todo/getPlans", dates);
       } catch (error) {
-        console.log(error);
+         (error);
       }
       this.isLoading = false;
     },

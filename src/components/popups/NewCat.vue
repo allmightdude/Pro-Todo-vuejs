@@ -74,7 +74,7 @@ export default {
           category: this.category,
         });
       } catch (error) {
-        console.log(error);
+         (error);
       }
       this.hidePopup(0);
     },
@@ -126,7 +126,7 @@ export default {
     &-item {
       background-color: #efefef;
       padding: 0.5rem 2rem;
-      border-radius: 50px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;

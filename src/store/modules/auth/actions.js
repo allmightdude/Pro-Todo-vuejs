@@ -43,7 +43,7 @@ export default {
         TokenService.removeUser();
       }
     } catch (error) {
-      console.log(error);
+       (error);
     }
     clearTimeout(timer);
   },

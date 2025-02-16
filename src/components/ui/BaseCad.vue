@@ -18,7 +18,7 @@ export default {
 <style lang="scss" scoped>
 .card {
   box-shadow: 0 0.5rem 3.5rem rgba(0, 0, 0, 0.1);
-  border-radius: 14px;
+  border-radius: 10px;
   background-color: #fff;
   display: flex;
   align-items: center;

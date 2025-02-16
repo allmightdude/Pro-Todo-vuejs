@@ -7,7 +7,7 @@ class UserService {
             let res = await api.get(`tasks/${date}`);
             return res
         } catch (error) {
-            console.log(error);
+             (error);
         }
     }
 

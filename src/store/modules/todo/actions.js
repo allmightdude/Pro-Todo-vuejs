@@ -4,11 +4,15 @@ export default {
   async getTasksbyDate({ commit }, date) {
     try {
       const res = await UserService.getTasksbyDate(date);
+
+      console.log(res);
+      
+      
       if (res.data.tasks) {
         commit("storeTasks", res.data.tasks);
       }
     } catch (error) {
-      console.log(error);
+       (error);
     }
   },
 
@@ -18,7 +22,7 @@ export default {
         commit("setPLans", plans);
       })
       .catch((err) => {
-        console.log(err);
+         (err);
       });
   },
 
@@ -50,7 +54,7 @@ export default {
       .then(() => {
         commit("checkTask", id);
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>  (err));
   },
 
   async getSinglePlan({ state }, id) {
@@ -66,7 +70,7 @@ export default {
         context.commit("amountCategory", { id: catID, mode: "inc" });
       }
     } catch (error) {
-      console.log(error);
+       (error);
     }
   },
 
@@ -87,7 +91,7 @@ export default {
         context.commit("addCategory", payload.category);
       }
     } catch (error) {
-      console.log(error);
+       (error);
     }
   },
 
@@ -96,13 +100,13 @@ export default {
       let res = await UserService.createTask(payload.task);
       if (res.data.success) context.commit("addTask", res.data.newTask);
     } catch (error) {
-      console.log(error);
+       (error);
     }
   },
 
   async deleteTask(context, payload) {
     const res = await UserService.deleteTask(payload.id);
-    console.log(res);
+     (res);
     context.commit("removeTask", payload.id);
   },
 };

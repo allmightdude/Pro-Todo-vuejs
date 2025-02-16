@@ -12,6 +12,7 @@
     />
 
     <TheHeader @showPopup="showPopup" />
+    
     <TheMain />
 
     <div class="btn-float">
@@ -126,7 +127,7 @@ export default {
     try {
       await this.$store.dispatch("tryLogin");
     } catch (error) {
-      console.log(error);
+       (error);
       this.error = error.message || 'Can not establish to server for get your data.try again later'
     }
 
@@ -148,7 +149,7 @@ export default {
   li {
     height: 4.5rem;
     width: 4.5rem;
-    border-radius: 50%;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -224,7 +225,7 @@ export default {
   letter-spacing: 0.5px;
   font-size: 1.1rem;
   white-space: nowrap;
-  border-radius: 4px;
+  border-radius: 10px;
   padding: 0.2rem 0.5rem;
   color: white;
   position: absolute;

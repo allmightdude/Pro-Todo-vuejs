@@ -18,6 +18,7 @@
               class="form__input"
               name="email"
               v-model="user.email"
+              required
             />
           </div>
 
@@ -29,6 +30,7 @@
               class="form__input"
               name="password"
               v-model="user.password"
+              required
             />
 
             <svg class="eye-icon" @click="showPassword">
@@ -51,6 +53,10 @@
             >
             <div class="forgot">Forgot Password?</div>
           </div>
+        </div>
+
+        <div>
+
         </div>
       </form>
     </div>
@@ -76,10 +82,14 @@ export default {
       this.isLoading = true;
       try {
         let res = await this.$store.dispatch("login", this.user);
+
         if (res.status === 200) {
           this.$router.replace("/");
         }
+
       } catch (error) {
+        console.log(error)
+        
         this.error = error.message || "Cant login , Try Again Later...";
       }
       this.isLoading = true;
@@ -99,8 +109,7 @@ export default {
   background: #efefef;
 
   &__form {
-    background-color: #fff;
-    border-radius: 40px;
+    border-radius: 10px;
     width: 40rem;
     box-shadow: 0 0.5 1rem rgba(#000, 0.9);
   }
@@ -116,8 +125,6 @@ export default {
     text-align: center;
     color: white;
     font-size: 2rem;
-    border-top-right-radius: 40px;
-    border-top-left-radius: 40px;
   }
 
   &__group {
@@ -138,10 +145,9 @@ export default {
 
   &__input {
     width: 100%;
-    border-radius: 50px;
+      border-radius: 10px;
     padding: 1rem 2rem;
     border: none;
-    background: #f5f5f5;
   }
 
   &__header {
@@ -153,7 +159,7 @@ export default {
     background: #00b894;
     padding: 1rem 2rem;
     margin-top: 1.5rem;
-    border-radius: 50px;
+    border-radius: 10px;
     text-align: center;
     color: white;
   }
@@ -173,7 +179,7 @@ export default {
   background-color: #d63031;
   color: white;
   padding: 1.5rem 2rem;
-  border-radius: 4px;
+  border-radius: 10px;
   position: fixed;
   right: 3rem;
   top: 3rem;

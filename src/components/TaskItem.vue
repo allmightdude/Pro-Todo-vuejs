@@ -47,7 +47,7 @@ export default {
       try {
         this.$store.dispatch('todo/deleteTask' , {id : id});
       } catch (error) {
-        console.log(error);
+         (error);
       }
     },
   },

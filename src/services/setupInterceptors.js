@@ -18,7 +18,7 @@ const setup = (store) => {
 
   axiosInstance.interceptors.response.use(
     (res) => {
-      console.log(res);
+       (res);
 
       return res;
     },
@@ -27,7 +27,7 @@ const setup = (store) => {
 
       if (originalConfig.url !== "users/login" && err.response) {
         // if (err.response.status == 403) {
-        //   console.log("No token provided");
+        //    ("No token provided");
         // }
 
         // Access Token was expired
@@ -46,7 +46,7 @@ const setup = (store) => {
             TokenService.updateLocalAccessToken(accessToken);
             return axiosInstance(originalConfig);
           } catch (error) {
-            // console.log("can not get refreshToken!", error);
+            //  ("can not get refreshToken!", error);
             if (error.response.status === 403 || err.response.status === 401) {
               store.dispatch("autoLogout");
             }

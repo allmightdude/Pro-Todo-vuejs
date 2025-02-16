@@ -33,7 +33,7 @@ export default {
       try {
         await this.$store.dispatch("autoLogout");
       } catch (error) {
-        console.log(error);
+         (error);
       }
       this.$router.push("/login");
     },

@@ -68,7 +68,7 @@ export default {
           this.tasks = res.data.tasks;
         })
         .catch((err) => {
-          console.log(err);
+           (err);
         });
     },
     addTaskToPlan(event, taskId) {
@@ -96,7 +96,7 @@ export default {
       try {
         await this.$store.dispatch("todo/addPlan", plan);
       } catch (error) {
-        console.log(error);
+         (error);
       }
       this.hidePopup();
     },
@@ -140,7 +140,7 @@ export default {
       // background-color: #fdcb6e;
       border: 1px solid #ff9f43;
       font-size: 1.3rem;
-      border-radius: 50px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -164,7 +164,7 @@ export default {
 
 select {
   width: 100%;
-  border-radius: 50px;
+  border-radius: 10px;
   padding: 1rem 2rem;
   border: none;
   background: #f5f5f5;

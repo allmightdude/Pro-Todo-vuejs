@@ -58,7 +58,7 @@ export default {
       try {
         this.$store.dispatch("todo/deletePlan", { id: id });
       } catch (error) {
-        console.log(error);
+         (error);
       }
       this.hidePopup();
     },
@@ -70,7 +70,7 @@ export default {
 .showPlan {
   background: #fff;
   box-shadow: 0 0.5rem 1rem rgba(#000, 0.3);
-  border-radius: 14px;
+  border-radius: 10px;
   padding: 2rem 4rem;
   width: 70rem;
   max-width: 100%;
@@ -87,7 +87,7 @@ export default {
   &__task {
     box-shadow: 0 0.2rem 0.5rem rgba(#000, 0.2);
     padding: 1rem 2rem;
-    border-radius: 14px;
+    border-radius: 10px;
     width: 20rem;
     max-width: 100%;
     min-height: 10rem;

@@ -55,7 +55,7 @@ export default {
       try {
         await this.$store.dispatch("todo/addTask", { task: data });
       } catch (error) {
-        console.log(error);
+         (error);
       }
       this.hidePopup();
     },
@@ -79,7 +79,7 @@ export default {
 
   &__form {
     background-color: #fff;
-    border-radius: 40px;
+    border-radius: 10px;
     width: 40rem;
     box-shadow: 0 0.5 1rem rgba(#000, 0.9);
   }
@@ -104,8 +104,8 @@ export default {
     text-align: center;
     color: white;
     font-size: 2rem;
-    border-top-right-radius: 40px;
-    border-top-left-radius: 40px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
     background-color: #ff9f43;
   }
 
@@ -121,7 +121,7 @@ export default {
 
   &__input {
     width: 100%;
-    border-radius: 50px;
+    border-radius: 10px;
     padding: 1rem 2rem;
     border: none;
     background: #f5f5f5;
@@ -136,7 +136,7 @@ export default {
     background: $color-primary;
     padding: 1rem 2rem;
     margin-top: 1.5rem;
-    border-radius: 50px;
+    border-radius: 10px;
     text-align: center;
     color: white;
   }

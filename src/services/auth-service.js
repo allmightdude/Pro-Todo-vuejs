@@ -9,7 +9,7 @@ class AuthService {
     //         password : user.password,
     //     })
     //     .then(res => {
-    //         console.log(res.data);
+    //          (res.data);
     //         if(res.data.accessToken){
     //             TokenService.setUser(res.data)
     //         }

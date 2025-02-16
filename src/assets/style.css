@@ -332,7 +332,7 @@ input[type="date"]:focus {
 .header {
   background-color: #00cbe5;
   color: white;
-  border-bottom-left-radius: 50px;
+  border-bottom-left-radius: 10px;
 }
 .header__top {
   display: -webkit-box;

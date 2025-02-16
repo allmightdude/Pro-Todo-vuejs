@@ -51,7 +51,7 @@ export default {
       try {
         await this.$store.dispatch("todo/getCategories");
       } catch (error) {
-        console.log(error);
+         (error);
       }
       this.isLoading = false;
     },
